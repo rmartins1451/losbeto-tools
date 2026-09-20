@@ -1,0 +1,329 @@
+{
+  "_meta": {
+    "provider": "Losbeto",
+    "base_url": "https://api.losbeto.xyz",
+    "protocol": "x402 (HTTP 402 Payment Required, USDC on Base/Solana/Algorand)",
+    "free_preview": "Add ?preview=1 to any endpoint for a free, ~15min-delayed real sample — no wallet, no signup.",
+    "real_time_payment": "Drop ?preview=1 and settle the 402 challenge via any x402 wallet/SDK (agentcash, x402-fetch, etc).",
+    "manifest": "https://api.losbeto.xyz/.well-known/x402.json",
+    "mcp": "https://api.losbeto.xyz/mcp",
+    "docs": "https://api.losbeto.xyz/llms.txt",
+    "note": "Anthropic and OpenAI schemas describe the SAME 12 endpoints — use whichever matches your model provider's tool-calling format."
+  },
+  "openai_tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_brazil_brief",
+        "description": "Brazil in global context: BCB macro, real interest rate, Ibovespa and B3 blue chips, with strategist synthesis. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_brazil_macro",
+        "description": "Selic, CDI, IPCA, IGP-M and official PTAX, assembled from separate Brazilian Central Bank series. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_brazil_rate_curve",
+        "description": "Selic, CDI annualised (252-business-day convention), TJLP and IPCA, plus the real rate via the Fisher relation. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_brazil_equity",
+        "description": "B3 quote (PETR4, VALE3, ITUB4 or Ibovespa) in BRL and USD at the official PTAX rate. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Query parameter: symbol"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_oracle_consensus",
+        "description": "Price consensus across Pyth, Coinbase, Kraken, Binance and CoinGecko in parallel, with spread in bps and outlier detection. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Query parameter: symbol"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_sentiment_consensus",
+        "description": "Four independent crypto market sentiment measures with divergence detection. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_correlation_matrix",
+        "description": "90-day cross-asset correlations: crypto vs S&P, Nasdaq, gold, oil, the dollar and 20Y treasuries. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_global_morning_brief",
+        "description": "Daily cross-asset read: forex, commodities, equities, crypto and the macro calendar, closed with strategist synthesis. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_equity_dossier",
+        "description": "Quote, earnings, macro context and analyst verdict for any ticker in one call. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Query parameter: symbol"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_launch_risk",
+        "description": "Pre-execution risk check for a new token: on-chain checks, DEX liquidity and an avoid/watch/size verdict. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Query parameter: symbol"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_token_intel",
+        "description": "Pre-execution screening for any contract or ticker: liquidity, pair age, buy/sell flow, honeypot and wash-trading signals. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Query parameter: symbol"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "losbeto_wallet_scan",
+        "description": "Counterparty enrichment before trusting an address: holdings, concentration, activity and spam exposure on Solana/Base. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": "Query parameter: address"
+            }
+          },
+          "required": []
+        }
+      }
+    }
+  ],
+  "anthropic_tools": [
+    {
+      "name": "losbeto_brazil_brief",
+      "description": "Brazil in global context: BCB macro, real interest rate, Ibovespa and B3 blue chips, with strategist synthesis. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_brazil_macro",
+      "description": "Selic, CDI, IPCA, IGP-M and official PTAX, assembled from separate Brazilian Central Bank series. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_brazil_rate_curve",
+      "description": "Selic, CDI annualised (252-business-day convention), TJLP and IPCA, plus the real rate via the Fisher relation. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_brazil_equity",
+      "description": "B3 quote (PETR4, VALE3, ITUB4 or Ibovespa) in BRL and USD at the official PTAX rate. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Query parameter: symbol"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_oracle_consensus",
+      "description": "Price consensus across Pyth, Coinbase, Kraken, Binance and CoinGecko in parallel, with spread in bps and outlier detection. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Query parameter: symbol"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_sentiment_consensus",
+      "description": "Four independent crypto market sentiment measures with divergence detection. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_correlation_matrix",
+      "description": "90-day cross-asset correlations: crypto vs S&P, Nasdaq, gold, oil, the dollar and 20Y treasuries. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_global_morning_brief",
+      "description": "Daily cross-asset read: forex, commodities, equities, crypto and the macro calendar, closed with strategist synthesis. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_equity_dossier",
+      "description": "Quote, earnings, macro context and analyst verdict for any ticker in one call. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Query parameter: symbol"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_launch_risk",
+      "description": "Pre-execution risk check for a new token: on-chain checks, DEX liquidity and an avoid/watch/size verdict. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Query parameter: symbol"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_token_intel",
+      "description": "Pre-execution screening for any contract or ticker: liquidity, pair age, buy/sell flow, honeypot and wash-trading signals. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Query parameter: symbol"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "losbeto_wallet_scan",
+      "description": "Counterparty enrichment before trusting an address: holdings, concentration, activity and spam exposure on Solana/Base. Returns a real, delayed (~15min) free sample, no wallet needed. For real-time data, pay per call via x402 at the same path (no account, no API key).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Query parameter: address"
+          }
+        },
+        "required": []
+      }
+    }
+  ]
+}
